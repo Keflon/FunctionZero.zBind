@@ -45,7 +45,10 @@ namespace zBind.MarkupExtension
             if (value is string stringResult)
                 return (OperandType.String, stringResult);
 
-            return (OperandType.Null, null);
+            if(value == null)
+                return (OperandType.Null, null);
+
+            return (OperandType.Object, value);
         }
 
         public void SetValue(string qualifiedName, object value)
