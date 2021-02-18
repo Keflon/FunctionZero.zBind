@@ -71,12 +71,11 @@ namespace zBind.MarkupExtension
 
             //bindableTarget.SetValue(bindableProperty, 32);
 
-            var ep = new ExpressionParser();
-            ep.RegisterFunction("Sin", DoSin, 1, 1);
+            var ep = ExpressionParserFactory.GetExpressionParser();
+
             var compiledExpression = ep.Parse(Expression);
 
             _multiBind = new MultiBinding();
-
 
             foreach (IToken item in compiledExpression)
             {
