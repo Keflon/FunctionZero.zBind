@@ -95,21 +95,11 @@ namespace zBind.MarkupExtension
                 }
             }
 
-            //_multiBind.Bindings = _bindingLookup.Values.ToList();
             _multiBind.Converter = new EvaluatorMultiConverter(_bindingLookup, compiledExpression);
 
             //TargetOnBindingContextChanged(bindableTarget, EventArgs.Empty);
 
             return _multiBind;
-        }
-
-        private void DoSin(Stack<IOperand> stack, IBackingStore store, long paramCount)
-        {
-            IOperand first = OperatorActions.PopAndResolve(stack, store);
-            double val = (double)first.GetValue();
-            var result = Math.Sin(val);
-            stack.Push(new Operand(-1, OperandType.Double, result));
-
         }
 
         //private void TargetOnBindingContextChanged(object sender, EventArgs e)

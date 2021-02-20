@@ -26,9 +26,6 @@ namespace zBind.MarkupExtension
             {
                 var stack = _compiledExpression.Evaluate(_evaluator);
 
-                //return thing.Pop().GetValue();
-
-
                 var operand = stack.Pop();
 
                 if (operand.Type == OperandType.Variable)

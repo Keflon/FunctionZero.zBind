@@ -37,6 +37,17 @@ namespace zBind.MarkupExtension
             return _expressionParser;
         }
 
+        public static void ReplaceDefaultExpressionParser(ExpressionParser replacement, bool allowLateReplacement)
+        {
+            if((_expressionParser == null) || allowLateReplacement)
+            {
+                _expressionParser = replacement;
+            }
+            else
+            {
+                throw new InvalidOperationException("Attempt to replace default ExpressionParser after it has created been created for a consumer");
+            }
+        }
 
         private static void DoSin(Stack<IOperand> stack, IBackingStore store, long paramCount)
         {
