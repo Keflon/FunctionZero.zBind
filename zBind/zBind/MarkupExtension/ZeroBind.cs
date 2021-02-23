@@ -6,7 +6,7 @@ using System.Xml;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace zBind.MarkupExtension
+namespace zBind.MarkupExtension.z
 {
     [ContentProperty("Expression")]
     public class Bind : IMarkupExtension<BindingBase>
