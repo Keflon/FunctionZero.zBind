@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:z="clr-namespace:zBind.MarkupExtension"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:z="clr-namespace:zBind.MarkupExtension"
              x:Class="zBind.Mvvm.TestPage.TestPage">
     <ContentPage.Content>
         <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">

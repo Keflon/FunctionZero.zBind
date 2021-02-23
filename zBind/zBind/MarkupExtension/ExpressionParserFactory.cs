@@ -29,10 +29,10 @@ namespace zBind.MarkupExtension
                 ep.RegisterOperator("LTE", 4, LessThanOrEqualMatrix.Create());
                 ep.RegisterOperator("GT", 4, GreaterThanMatrix.Create());
                 ep.RegisterOperator("GTE", 4, GreaterThanOrEqualMatrix.Create());
-                ep.RegisterOperator("BITWISEAND", 4, BitwiseAndMatrix.Create());
-                ep.RegisterOperator("BITWISEOR", 4, BitwiseOrMatrix.Create());
+                ep.RegisterOperator("BAND", 4, BitwiseAndMatrix.Create());
+                ep.RegisterOperator("BOR", 4, BitwiseOrMatrix.Create());
 
-                _expressionParser = ep;
+                ReplaceDefaultExpressionParser(ep, false);
             }
             return _expressionParser;
         }
