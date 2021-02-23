@@ -26,6 +26,17 @@ xmlns:z="clr-namespace:zBind.MarkupExtension"
 ```
 And that's all there is to it, you can now `z:Bind` to any properties in your ViewModel
 
+## Usage
+
+`z:Bind` to properties in your `BindingContext`, like this:
+
+|Sample|Notes|
+|--|:--:|
+|`{z:Bind Count}`| Bind to `Count`|
+|`{z:Bind Count * 2}`| Bind to an expression that yields Count * 2|
+|`{z:Bind (Count * 2) LT 10}`| True if (Count * 2) < 10|
+|`{z:Bind Sin(Count / 25.0)}`| Calls a _function_ (see below)|
+
 ### Aliases supported to simplify xaml
 |Operator|Alias|
 |:--:|:--:|
@@ -45,16 +56,6 @@ Lower precision types (`int`, `char`, `float` etc) are cast to their appropriate
 
 ### Supported reference types
 `string`, `object`
-
-## Usage
-
-`z:Bind` to properties in your `BindingContext`, like this:
-
-|Sample|Notes|
-|--|:--:|
-|`{z:Bind Count}`| Bind to `Count`|
-|`{z:Bind Count * 2}`| Bind to an expression that yields Count * 2|
-|`{z:Bind (Count * 2) LT 10}`| True if (Count * 2) < 10|
 
 ## Advanced Usage - Functions, aliases and operator-overloads
  `z:Bind` uses [`FunctionZero.ExpressionParserZero`](https://github.com/Keflon/FunctionZero.ExpressionParserZero) to do the heavy lifting, so take a look at the [documentation](https://github.com/Keflon/FunctionZero.ExpressionParserZero)
