@@ -2,9 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:z="clr-namespace:zBind.MarkupExtension.z"
-             x:Class="zBind.Mvvm.TestPage.TestPage"
-             x:Name="Self"
-             >
+             x:Class="zBind.Mvvm.TestPage.TestPage">
     <ContentPage.Content>
         <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
             <Label Text="Welcome to z:Bind!"
@@ -14,8 +12,9 @@
                    TranslationX="{z:Bind Sin(Count / 25.0) * 100.0}"
                    TranslationY="{z:Bind Cos(Count / 15.0) * 100}"
                    Rotation="{z:Bind Sin(Count / 5.0) * 20}"
-                   Scale="{z:Bind Width / 100, Source={x:Reference Self}}"
+                   Scale="{z:Bind Value * 3 + 1, Source={x:Reference TheSlider}}"
                    />
+            <Slider x:Name="TheSlider" Minimum="0" Maximum="1" Value="0.5"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

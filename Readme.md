@@ -36,6 +36,7 @@ And that's all there is to it, you can now `z:Bind` to any properties in your Vi
 |`{z:Bind Count * 2}`| Bind to an expression that yields Count * 2|
 |`{z:Bind (Count * 2) LT 10}`| True if (Count * 2) < 10|
 |`{z:Bind Sin(Count / 25.0)}`| Calls a _function_ (see below)|
+|`{z:Bind IsExpanded, Source={x:Reference MyExpander}}`|Bind to any object|
 
 ### Aliases supported to simplify xaml
 |Operator|Alias|
