@@ -16,6 +16,8 @@ namespace zBind.MarkupExtension.z
 
         private IList<string> _bindingLookup;
 
+        public object Source { get; set; }
+
         public Bind()
         {
         }
@@ -39,6 +41,8 @@ namespace zBind.MarkupExtension.z
             //bindableTarget.BindingContextChanged += TargetOnBindingContextChanged;
             //bindableTarget.SetValue(bindableProperty, 32);
 
+            var bindingSourceObject = Source ?? bindableTarget.BindingContext;
+
             var ep = ExpressionParserFactory.GetExpressionParser();
 
             var compiledExpression = ep.Parse(Expression);
@@ -53,7 +57,7 @@ namespace zBind.MarkupExtension.z
                     {
                         if(_bindingLookup.Contains(op.ToString()) == false)
                         {
-                            var binding = new Binding(op.ToString(), BindingMode.TwoWay, null, null, null, bindableTarget.BindingContext);
+                            var binding = new Binding(op.ToString(), BindingMode.OneWay, null, null, null, bindingSourceObject);
                             _bindingLookup.Add(op.ToString());
                             _multiBind.Bindings.Add(binding);
                         }
