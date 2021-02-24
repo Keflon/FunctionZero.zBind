@@ -1,7 +1,9 @@
-﻿using FunctionZero.ExpressionParserZero.Operands;
+﻿using FunctionZero.ExpressionParserZero.Exceptions;
+using FunctionZero.ExpressionParserZero.Operands;
 using FunctionZero.ExpressionParserZero.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Xml;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -45,28 +47,37 @@ namespace zBind.MarkupExtension.z
 
             var ep = ExpressionParserFactory.GetExpressionParser();
 
-            var compiledExpression = ep.Parse(Expression);
-
             _multiBind = new MultiBinding();
 
-            foreach (IToken item in compiledExpression)
+            try
             {
-                if(item is Operand op)
+                var compiledExpression = ep.Parse(Expression);
+                foreach (IToken item in compiledExpression)
                 {
-                    if(op.Type == OperandType.Variable)
+                    if (item is Operand op)
                     {
-                        if(_bindingLookup.Contains(op.ToString()) == false)
+                        if (op.Type == OperandType.Variable)
                         {
-                            var binding = new Binding(op.ToString(), BindingMode.OneWay, null, null, null, bindingSourceObject);
-                            _bindingLookup.Add(op.ToString());
-                            _multiBind.Bindings.Add(binding);
+                            if (_bindingLookup.Contains(op.ToString()) == false)
+                            {
+                                var binding = new Binding(op.ToString(), BindingMode.OneWay, null, null, null, bindingSourceObject);
+                                _bindingLookup.Add(op.ToString());
+                                _multiBind.Bindings.Add(binding);
+                            }
                         }
                     }
                 }
+                _multiBind.Converter = new EvaluatorMultiConverter(_bindingLookup, compiledExpression);
             }
-
-            _multiBind.Converter = new EvaluatorMultiConverter(_bindingLookup, compiledExpression);
-
+            catch (ExpressionParserException ex)
+            {
+                IXmlLineInfo lineInfo = (serviceProvider.GetService(typeof(IXmlLineInfoProvider)) is IXmlLineInfoProvider lineInfoProvider) ? lineInfoProvider.XmlLineInfo : new XmlLineInfo();
+                Debug.WriteLine(
+                    $"z:Bind exception at line {lineInfo.LineNumber}, Column {lineInfo.LinePosition + ex.Offset}: " + Environment.NewLine +
+                    $"Expression '{Expression}' error at offset {ex.Offset} - " +
+                    ex.Message);
+                return new Binding("_dummy_value_");
+            }
             return _multiBind;
         }
 

@@ -39,7 +39,10 @@ namespace zBind.MarkupExtension
             }
             catch(Exception ex)
             {
-                return null;
+                if (targetType.IsValueType && Nullable.GetUnderlyingType(targetType) == null)
+                    return Activator.CreateInstance(targetType);
+                else
+                    return null;
             }
         }
 

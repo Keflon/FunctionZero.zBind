@@ -6,8 +6,7 @@
     <ContentPage.Content>
         <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
             <Label Text="Welcome to z:Bind!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand"
+
                    
                    TranslationX="{z:Bind Sin(Count / 25.0) * 100.0}"
                    TranslationY="{z:Bind Cos(Count / 15.0) * 100}"
